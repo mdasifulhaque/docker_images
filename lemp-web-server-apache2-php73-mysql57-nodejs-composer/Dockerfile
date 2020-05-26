@@ -16,47 +16,47 @@ RUN apt update \
 	&& apt-get update 
 
 RUN apt-get install -y \
-vim \
-apache2 \
-curl \
-zip \
-unzip \
-php7.3 \
-php7.3-cli \
-ibapache2-mod-php7.3 \
-php7.3-mysql \
-php7.3-curl \
-php7.3-ctype \
-php7.3-uuid \
-php7.3-iconv \
-php7.3-json \
-php7.3-mbstring \ 
-php7.3-gd \
-php7.3-intl \ 
-php7.3-xml \ 
-php7.3-zip \
-php-gettext \
-php7.3-pgsql \
-php7.3-bcmath \
-php7.3-redis \
-mysql-server-5.7 \
-mysql-client-5.7 \
-nodejs \
-npm \
-&& apt-get clean \
-&& rm -rf  /var/lib/apt/lists/* /tmp/* /var/tmp/*
+	vim \
+	apache2 \
+	curl \
+	zip \
+	unzip \
+	php7.3 \
+	php7.3-cli \
+	ibapache2-mod-php7.3 \
+	php7.3-mysql \
+	php7.3-curl \
+	php7.3-ctype \
+	php7.3-uuid \
+	php7.3-iconv \
+	php7.3-json \
+	php7.3-mbstring \ 
+	php7.3-gd \
+	php7.3-intl \ 
+	php7.3-xml \ 
+	php7.3-zip \
+	php-gettext \
+	php7.3-pgsql \
+	php7.3-bcmath \
+	php7.3-redis \
+	mysql-server-5.7 \
+	mysql-client-5.7 \
+	nodejs \
+	npm \
+	&& apt-get clean \
+	&& rm -rf  /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
 RUN phpenmod curl \
-# Enable some apache modules
-a2enmod rewrite \
-a2enmod ssl \
-a2enmod headers \
-# Install MySQL Server in a Non-Interactive mode. Default root password will be "root"
-echo "mysql-server-5.7 mysql-server/root_password password root" | debconf-set-selections \
-echo "mysql-server-5.7 mysql-server/root_password_again password root" | debconf-set-selections \
-# Clean up cache
-&& apt-get clean
+	# Enable some apache modules
+	a2enmod rewrite \
+	a2enmod ssl \
+	a2enmod headers \
+	# Install MySQL Server in a Non-Interactive mode. Default root password will be "root"
+	echo "mysql-server-5.7 mysql-server/root_password password root" | debconf-set-selections \
+	echo "mysql-server-5.7 mysql-server/root_password_again password root" | debconf-set-selections \
+	# Clean up cache
+	&& apt-get clean
 
 
 COPY ./scripts/composer_install.sh /root/scripts/
@@ -72,7 +72,7 @@ COPY ./apache2/php.ini /etc/apache2/php/7.3/apache2/
 COPY ./scripts/docker-run.sh /root/scripts/
 RUN chmod +x /root/scripts/docker-run.sh
 EXPOSE 80 443 3306 
-#VOLUME ["/var/lib/mysql","/var/www/html"]
+VOLUME ["/var/lib/mysql","/var/www/html"]
 ENTRYPOINT ["/root/scripts/docker-run.sh"]
 
 
