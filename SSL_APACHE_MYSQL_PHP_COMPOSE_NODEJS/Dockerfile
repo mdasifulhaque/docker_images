@@ -12,6 +12,7 @@ RUN apt update \
 	&& locale-gen en_US.UTF-8 \
 	&& export LANG=en_US.UTF-8 \
 	&& apt-get install -y software-properties-common \
+	&& add-apt-repository ppa:certbot/cartbot \
 	&& add-apt-repository -y ppa:ondrej/php \
 	&& apt-get update 
 

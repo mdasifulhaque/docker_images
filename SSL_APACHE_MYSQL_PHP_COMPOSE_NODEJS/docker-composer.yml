@@ -1,0 +1,23 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:5.6
+    volumes: /opt/mysql/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=db_password123
+      - MYSQL_ROOT_USER= root
+      - restart= Always
+    ports:
+      - 3306:3306
+  apache2:
+    image: apache2:latest
+    volume: /var/www/html/
+    name: apache-server
+    ports:
+      - 80:80
+  redis:
+    image: redis:alpine
+    ports:
+      - "6379:6379"
+    deploy:
+      replicas: 2
